@@ -17,6 +17,7 @@ import {
   signUp,
 } from 'aws-amplify/auth'
 import { useEffect, useState } from 'react'
+import { AuthContext, CurrentUser, initialUser } from '../contexts/AuthContext'
 import SignIn from './SignIn'
 import SignUp from './SignUp'
 
@@ -59,11 +60,7 @@ const AuthWrapper = ({ children }: any) => {
     fetchCurrentUser()
   }, [])
 
-  const [currentUser, setCurrentUser] = useState({
-    userId: '',
-    name: '',
-    isAdmin: false,
-  })
+  const [currentUser, setCurrentUser] = useState<CurrentUser>(initialUser)
 
   const [isLoading, setIsLoading] = useState(false)
 
@@ -115,11 +112,7 @@ const AuthWrapper = ({ children }: any) => {
   const handleSignOut = async () => {
     setIsLoading(true)
     await signOut()
-    setCurrentUser({
-      userId: '',
-      name: '',
-      isAdmin: false,
-    })
+    setCurrentUser(initialUser)
     setIsLoading(false)
   }
 
@@ -142,7 +135,9 @@ const AuthWrapper = ({ children }: any) => {
             Sign Out
           </Button>
         </Box>
-        {children}
+        <AuthContext.Provider value={currentUser}>
+          {children}
+        </AuthContext.Provider>
       </Container>
     )
   }

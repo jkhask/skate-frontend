@@ -6,6 +6,7 @@ import { CssVarsProvider } from '@mui/joy/styles/CssVarsProvider'
 import { Amplify } from 'aws-amplify'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import AuthWrapper from './components/AuthWrapper'
+import MainPage from './components/MainPage'
 
 Amplify.configure({
   Auth: {
@@ -21,7 +22,7 @@ Amplify.configure({
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <>You're logged in. WIP</>,
+    element: <MainPage />,
   },
 ])
 
