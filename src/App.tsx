@@ -11,10 +11,17 @@ import MainPage from './components/MainPage'
 Amplify.configure({
   Auth: {
     Cognito: {
-      userPoolId: 'us-east-1_ZFkTXwNgt',
-      userPoolClientId: '1g9bcg46thui37c03bktqhp1mp',
-      identityPoolId: 'us-east-1:eca715f1-06fb-4d72-9d27-0ef73d0134cb',
+      userPoolId: process.env.REACT_APP_AUTH_USER_POOL_ID!,
+      identityPoolId: process.env.REACT_APP_AUTH_IDENTITY_POOL_ID!,
+      userPoolClientId: process.env.REACT_APP_AUTH_USER_POOL_CLIENT_ID!,
       signUpVerificationMethod: 'link',
+    },
+  },
+  API: {
+    GraphQL: {
+      endpoint: process.env.REACT_APP_API_ENDPOINT!,
+      region: 'us-east-1',
+      defaultAuthMode: 'userPool',
     },
   },
 })
@@ -61,7 +68,7 @@ export default function App() {
           }}
         >
           <AuthWrapper>
-            <RouterProvider router={router} />
+            <RouterProvider {...{ router }} />
           </AuthWrapper>
         </Sheet>
       </Container>
