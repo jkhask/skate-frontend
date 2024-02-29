@@ -21,7 +21,7 @@ const MainPage: React.FC<MainPageProps> = () => {
   }, [isAdmin])
 
   return (
-    <Box sx={{ display: 'flex', gap: 4, mt: 4 }}>
+    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 4, mt: 4 }}>
       {skaters.map((skater, i) => (
         <SkaterCard {...{ skater }} key={i} />
       ))}
