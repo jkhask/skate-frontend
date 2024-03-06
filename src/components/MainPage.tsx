@@ -20,10 +20,20 @@ const MainPage: React.FC<MainPageProps> = () => {
     })()
   }, [isAdmin])
 
+  const onUpdateSkater = (updatedSkater: Skater) => {
+    const updatedSkaters = skaters.map(skater => {
+      if (skater.sub === updatedSkater.sub) {
+        return updatedSkater
+      }
+      return skater
+    })
+    setSkaters(updatedSkaters)
+  }
+
   return (
     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 4, mt: 4 }}>
       {skaters.map((skater, i) => (
-        <SkaterCard {...{ skater }} key={i} />
+        <SkaterCard {...{ skater, onUpdateSkater }} key={i} />
       ))}
     </Box>
   )
