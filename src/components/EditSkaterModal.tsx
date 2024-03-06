@@ -95,6 +95,7 @@ const EditSkaterModal: React.FC<EditSkaterModalProps> = ({
                 placeholder="Email"
                 startDecorator={<Email />}
                 required
+                disabled
               />
               {!!errors.email && (
                 <FormHelperText>
